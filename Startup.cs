@@ -62,6 +62,8 @@ namespace CompanyEmployees
             services.AddCustomMediaTypes();
 
             services.ConfigureLoggerService();
+
+            services.ConfigureVersioning();
         }
 
         private static NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter()

@@ -37,6 +37,7 @@
           "CompanyEmployees.Presentation": "1.0.0",
           "Contracts": "1.0.0",
           "LoggerService": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.Versioning": "5.1.0",
           "Microsoft.EntityFrameworkCore.Design": "5.0.17",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.17",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.17",
@@ -487,6 +488,17 @@
         },
         "compile": {
           "lib/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.Versioning/5.1.0": {
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Mvc.Versioning.dll": {
+            "assemblyVersion": "5.1.0.0",
+            "fileVersion": "5.1.8270.41506"
+          }
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Mvc.Versioning.dll": {}
         }
       },
       "Microsoft.AspNetCore.ResponseCaching.Abstractions/2.2.0": {
@@ -1639,6 +1651,7 @@
           "Microsoft.AspNetCore.JsonPatch": "7.0.5",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "5.0.17",
+          "Microsoft.AspNetCore.Mvc.Versioning": "5.1.0",
           "Service.Contract": "1.0.0"
         },
         "runtime": {
@@ -3515,6 +3528,13 @@
       "sha512": "sha512-E6Y7BD5pnoP/H4j4tBE7Hyi06+X7YfXKQnq2okwQfo8l4dfKL+EIxZ2ToaQ+XnXXqwwxZ7ggbyp17fJeb5uxJg==",
       "path": "microsoft.aspnetcore.mvc.newtonsoftjson/5.0.17",
       "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.5.0.17.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Mvc.Versioning/5.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UX8w9BlCiZpr6Ox4YAve1w0CkI1CAovukGNzKd7v0+5pZc8lzuG5tRovucr1RWIKHs0E/Yx8563CN7KzaB3bpw==",
+      "path": "microsoft.aspnetcore.mvc.versioning/5.1.0",
+      "hashPath": "microsoft.aspnetcore.mvc.versioning.5.1.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.ResponseCaching.Abstractions/2.2.0": {
       "type": "package",

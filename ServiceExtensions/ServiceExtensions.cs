@@ -19,7 +19,7 @@ using Entities.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace CompanyEmployees.ServiceExtensions
 {
@@ -110,6 +110,17 @@ namespace CompanyEmployees.ServiceExtensions
             }
          ); 
         }
+
+        public static void ConfigureVersioning(this IServiceCollection services)
+        {
+            services.AddApiVersioning(option =>
+            {
+                option.ReportApiVersions = true;
+                option.AssumeDefaultVersionWhenUnspecified = true;
+                option.DefaultApiVersion = new ApiVersion(1, 0);
+            });
+        }
+
     }
 
 
