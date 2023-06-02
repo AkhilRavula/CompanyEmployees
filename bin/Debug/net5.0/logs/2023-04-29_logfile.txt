@@ -1,0 +1,2 @@
+2023-04-29 06:05:37.4488 DEBUG Debug method testing
+2023-04-29 06:05:37.6036 ERROR error message testing
