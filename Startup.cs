@@ -40,6 +40,8 @@ namespace CompanyEmployees
             
             services.AddAutoMapper(typeof(Startup));
             services.ConfigureCORS();
+            services.ConfigureCachestorage();
+            services.ConfigureHttpCacheHeaders();
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryManager();
             services.ConfigureServiceManager();
@@ -48,13 +50,17 @@ namespace CompanyEmployees
                 options.SuppressModelStateInvalidFilter = true;
                 
             });
-            
+
+            services.AddAuthentication();
+            services.ConfigureIdentity();
+
             services.AddControllers(config =>
             {
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
                 config.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
-             
+                config.CacheProfiles.Add("120SecondsDuration", new CacheProfile { Duration = 120 });
+
             }).AddXmlDataContractSerializerFormatters()
             .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly)
             .AddNewtonsoftJson();
@@ -96,7 +102,10 @@ namespace CompanyEmployees
             app.UseStaticFiles();
             app.UseRouting();
             app.UseCors("CorsPolicy");
+            app.UseResponseCaching();
+            app.UseHttpCacheHeaders();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -12,6 +12,9 @@ namespace CompanyEmployees
     {
         public MappingProfile()
         {
+
+            CreateMap<UserForRegistrationDto, User>();
+
             CreateMap<Company, CompanyDto>().ForMember("FullAddress", 
                 c => c.MapFrom(x => x.Address + "" + x.Country));
 

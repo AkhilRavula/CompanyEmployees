@@ -20,6 +20,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Marvin.Cache.Headers;
+using Entities.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CompanyEmployees.ServiceExtensions
 {
@@ -91,7 +94,19 @@ namespace CompanyEmployees.ServiceExtensions
             );
         }
 
+        public static void ConfigureCachestorage(this IServiceCollection services)
+        {
+            services.AddResponseCaching();
+        }
 
+        public static void ConfigureHttpCacheHeaders(this IServiceCollection services)
+        {
+            services.AddHttpCacheHeaders(
+                (expiryoptions) => { expiryoptions.CacheLocation = CacheLocation.Private;
+                    expiryoptions.MaxAge = 65;
+                }
+                  , (ValidationModelOption) => ValidationModelOption.MustRevalidate = true) ;
+        }
 
         public static void AddCustomMediaTypes(this IServiceCollection services) 
         { 
@@ -119,6 +134,20 @@ namespace CompanyEmployees.ServiceExtensions
                 option.AssumeDefaultVersionWhenUnspecified = true;
                 option.DefaultApiVersion = new ApiVersion(1, 0);
             });
+        }
+
+
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<User, IdentityRole>(setup =>
+             {
+                 setup.Password.RequireDigit = true;
+                 setup.Password.RequireLowercase = false;
+                 setup.Password.RequireUppercase = false;
+                 setup.Password.RequireNonAlphanumeric = false;
+                 setup.Password.RequiredLength = 10;
+                 setup.User.RequireUniqueEmail = true;
+             }).AddEntityFrameworkStores<RepositoryContext>().AddDefaultTokenProviders();
         }
 
     }
