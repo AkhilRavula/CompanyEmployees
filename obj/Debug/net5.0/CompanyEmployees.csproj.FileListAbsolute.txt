@@ -93,3 +93,4 @@ C:\WebAPI\CompanyEmployees\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Ke
 C:\WebAPI\CompanyEmployees\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\WebAPI\CompanyEmployees\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
 C:\WebAPI\CompanyEmployees\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+C:\WebAPI\CompanyEmployees\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
