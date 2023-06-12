@@ -53,6 +53,7 @@ namespace CompanyEmployees
 
             services.AddAuthentication();
             services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration);
 
             services.AddControllers(config =>
             {

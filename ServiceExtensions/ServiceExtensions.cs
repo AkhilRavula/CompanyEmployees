@@ -23,6 +23,8 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Marvin.Cache.Headers;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CompanyEmployees.ServiceExtensions
 {
@@ -148,6 +150,33 @@ namespace CompanyEmployees.ServiceExtensions
                  setup.Password.RequiredLength = 10;
                  setup.User.RequireUniqueEmail = true;
              }).AddEntityFrameworkStores<RepositoryContext>().AddDefaultTokenProviders();
+        }
+
+
+        public static void ConfigureJWT(this IServiceCollection services,IConfiguration configuration)
+        {
+           var jwtsettings = configuration.GetSection("JwtSettings");
+            var secretkey = jwtsettings["SecretKey"];
+
+            services.AddAuthentication(optn =>
+            {
+                optn.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                optn.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(optn =>
+            {
+                optn.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = jwtsettings["ValidIssuer"],
+                    ValidAudience = jwtsettings["ValidAudience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretkey))
+
+                };
+            });
         }
 
     }
