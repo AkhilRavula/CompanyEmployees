@@ -5,9 +5,45 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Contracts\**" />
+    <Compile Remove="Entities\**" />
+    <Compile Remove="LoggerService\**" />
+    <Compile Remove="Presentation\**" />
+    <Compile Remove="Repository\**" />
+    <Compile Remove="Service.Contract\**" />
+    <Compile Remove="Services\**" />
+    <Compile Remove="Shared\**" />
+    <Content Remove="Contracts\**" />
+    <Content Remove="Entities\**" />
+    <Content Remove="LoggerService\**" />
+    <Content Remove="Presentation\**" />
+    <Content Remove="Repository\**" />
+    <Content Remove="Service.Contract\**" />
+    <Content Remove="Services\**" />
+    <Content Remove="Shared\**" />
+    <EmbeddedResource Remove="Contracts\**" />
+    <EmbeddedResource Remove="Entities\**" />
+    <EmbeddedResource Remove="LoggerService\**" />
+    <EmbeddedResource Remove="Presentation\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <EmbeddedResource Remove="Service.Contract\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <EmbeddedResource Remove="Shared\**" />
+    <None Remove="Contracts\**" />
+    <None Remove="Entities\**" />
+    <None Remove="LoggerService\**" />
+    <None Remove="Presentation\**" />
+    <None Remove="Repository\**" />
+    <None Remove="Service.Contract\**" />
+    <None Remove="Services\**" />
+    <None Remove="Shared\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Marvin.Cache.Headers" Version="6.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17">
       <PrivateAssets>all</PrivateAssets>
@@ -22,12 +58,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Contracts\Contracts.csproj" />
-    <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
-    <ProjectReference Include="..\Presentation\CompanyEmployees.Presentation.csproj" />
-    <ProjectReference Include="..\Repository\Repository.csproj" />
-    <ProjectReference Include="..\Service.Contract\Service.Contract.csproj" />
-    <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="LoggerService\LoggerService.csproj" />
+    <ProjectReference Include="Presentation\CompanyEmployees.Presentation.csproj" />
+    <ProjectReference Include="Repository\Repository.csproj" />
+    <ProjectReference Include="Services\Services.csproj" />
   </ItemGroup>
 
 </Project>
