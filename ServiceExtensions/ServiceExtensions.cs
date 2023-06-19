@@ -179,6 +179,11 @@ namespace CompanyEmployees.ServiceExtensions
             });
         }
 
+
+        public static void ConfigureJwtSettings(this IServiceCollection services,IConfiguration configuration)
+        {
+            services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
+        }
     }
 
 
