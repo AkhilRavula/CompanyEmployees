@@ -18,6 +18,7 @@ using Contracts;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using System.Net.Mime;
+using CompanyEmployees.Presentation.ActionFilters;
 
 namespace CompanyEmployees
 {
@@ -54,7 +55,7 @@ namespace CompanyEmployees
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
-
+            services.AddScoped<ValidationFilterAttribute>();
             services.AddControllers(config =>
             {
                 config.RespectBrowserAcceptHeader = true;
