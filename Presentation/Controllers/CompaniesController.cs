@@ -36,6 +36,7 @@ namespace CompanyEmployees.Presentation.Controllers
         [HttpGet (Name ="GetCompanies")]
         //[ResponseCache(Duration =60)]
         [Authorize]
+        [Produces("application/json")]
         public async Task<IActionResult> GetAllCompanies()
         {              
                 var list =await _Service.CompanyService.getAllCompaniesAsync(trackChanges:false);

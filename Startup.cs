@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using System.Net.Mime;
 using CompanyEmployees.Presentation.ActionFilters;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace CompanyEmployees
 {
@@ -31,7 +33,7 @@ namespace CompanyEmployees
 
         }
 
-      
+
 
         public IConfiguration Configuration { get; }
 
@@ -49,9 +51,39 @@ namespace CompanyEmployees
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
-                
-            });
 
+            });
+            services.AddSwaggerGen(
+                c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Version = "v1",
+                        Title = "CompanyEmployees API",
+                        Description = "An ASP.NET Core Web API for managing Companies"
+                    });
+                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    {
+                        Scheme = "Bearer",
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.Http,
+                        BearerFormat = "JWT",
+                        In = ParameterLocation.Header,
+                        Description = "Enter JWT Bearer[space] token"
+
+                    });                   
+                    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                   {
+                       {
+                          new OpenApiSecurityScheme
+                           {
+                             Reference = new OpenApiReference{Type = ReferenceType.SecurityScheme,
+                             Id = "Bearer" }
+                            }, new string[] {}
+                        }
+                    });
+                }
+            );
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
@@ -62,7 +94,6 @@ namespace CompanyEmployees
                 config.ReturnHttpNotAcceptable = true;
                 config.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
                 config.CacheProfiles.Add("120SecondsDuration", new CacheProfile { Duration = 120 });
-
             }).AddXmlDataContractSerializerFormatters()
             .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly)
             .AddNewtonsoftJson();
@@ -93,12 +124,23 @@ namespace CompanyEmployees
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI((options) =>
+            {
+                options.SwaggerEndpoint("../swagger/v1/swagger.json", "v1");
+                options.RoutePrefix = string.Empty;
+            });
             if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+
+            }
+            else
             {
                 app.UseHsts();
             }
 
-            var logger = app.ApplicationServices.GetRequiredService<ILoggerManager>(); 
+            var logger = app.ApplicationServices.GetRequiredService<ILoggerManager>();
             app.ConfigureGlobalExceptionHandler(logger);
             app.UseHttpsRedirection();
             app.UseStaticFiles();

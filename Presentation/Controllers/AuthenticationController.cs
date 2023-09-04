@@ -21,7 +21,7 @@ namespace CompanyEmployees.Presentation.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto user)
         {
             var result = await serviceManager.authenticationService.RegisterUser(user);

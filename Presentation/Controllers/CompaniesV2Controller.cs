@@ -11,7 +11,7 @@ namespace CompanyEmployees.Presentation.Controllers
 
     [ApiVersion("2.0")]
     [ApiController]
-    [Route("api/Companies")]
+    [Route("api/CompaniesV2")]
     public class CompaniesV2Controller : ControllerBase
     {
 
